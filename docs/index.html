@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="canonical" href="https://www.hexstreamsoft.com/libraries/enhanced-typep/" />
+    <meta name="author" content="Jean-Philippe Paradis" />
+    <link rel="author" href="https://abc.hexstream.xyz/" />
+    <link rel="license" href="https://www.hexstreamsoft.com/UNLICENSE" />
+    <meta name="description" content="Obsoletes all TYPEP thin wrappers." />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>enhanced-typep | Libraries | HexstreamSoft</title>
+    <link href="https://www.hexstreamsoft.com/css/global.css" rel="stylesheet" type="text/css" />
+    <link href="https://www.hexstreamsoft.com/libraries/libraries.css" rel="stylesheet" type="text/css" />
+    <link href="https://global.hexstreamsoft.com/css/cl-definitions.css" rel="stylesheet" type="text/css" />
+    <script src="https://global.hexstreamsoft.com/scripts/global.js"></script>
+    <script src="https://www.hexstreamsoft.com/scripts/global.js"></script>
+    <script src="https://www.hexstreamsoft.com/libraries/libraries.js" defer></script>
+  </head>
+
+  <body>
+
+    <nav id="top-nav">
+
+      <div class="main">
+
+        <div class="breadcrumbs">
+          <a href="https://www.hexstreamsoft.com/">HexstreamSoft</a>
+          <span class="crumb"><span class="s"> » </span><a href="https://www.hexstreamsoft.com/libraries/">Libraries</a></span>
+          <span class="crumb"><span class="s"> » </span><a class="here">enhanced-typep</a></span>
+        </div>
+
+        <nav class="tabs" id="meta-nav">
+          <ul>
+            <li><a class="github" href="https://github.com/Hexstream/enhanced-typep"><span>See on GitHub</span></a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+      <p id="last-updated"><span>This page was last updated on </span><time datetime="2020-10-08">8 october 2020</time><span>.</span></p>
+
+    </nav>
+
+    <main>
+
+      <header id="page-header">
+        <h1>enhanced-typep</h1>
+      </header>
+
+      <div class="tags contains-groups">
+        <div class="group prominent">
+          <span class="tag hv license">
+            <span class="h">License<span>:</span></span>
+            <span class="v">Public Domain</span>
+          </span>
+          <span class="s">, </span>
+          <span class="tag hv quicklisp">
+            <span class="h">Load it with Quicklisp<span>:</span></span>
+            <code class="v">(ql:quickload "enhanced-typep")</code>
+          </span>
+        </div>
+        <div class="group">
+          <span class="tag hv">
+            <span class="h">Library type<span>:</span></span>
+            <span class="v">Convenience function</span>
+          </span>
+          <span class="s">, </span>
+          <span class="tag hv">
+            <span class="h">Project complexity<span>:</span></span>
+            <span class="v">Trivial</span>
+          </span>
+        </div>
+      </div>
+
+      <nav class="tabs" id="further-info">
+        <ul>
+          <li><a href="https://www.hexstreamsoft.com/libraries/releases/latest-versions/#enhanced-typep">Latest release</a></li>
+          <li><a href="https://www.hexstreamsoft.com/libraries/dependencies/#enhanced-typep">Dependencies</a></li>
+        </ul>
+        <ul>
+          <li><a href="https://www.hexstreamsoft.com/libraries/external-pages-xref/#enhanced-typep">External library pages</a></li>
+        </ul>
+      </nav>
+
+      <section id="introduction">
+
+        <p><dfn><code class="relevant">enhanced-typep</code></dfn> obsoletes all <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">typep</a> <a href="https://www.hexstreamsoft.com/articles/notes-tips-standard-common-lisp-symbols/themes/thin-wrappers/" target="_blank">thin wrappers</a>.</p>
+
+      </section>
+
+      <nav class="tabs">
+        <ul>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#dictionary">Dictionary</a></li>
+        </ul>
+      </nav>
+
+      <section id="overview">
+
+        <h1 class="breadcrumbs-bar">
+          <span class="section-relative-nav">
+            <a href="#overview" class="anchor">⚓</a>
+          </span>
+          <span class="breadcrumbs">
+            <a class="here">Overview</a>
+          </span>
+        </h1>
+
+        <p>25 standard Common Lisp symbols are entirely dedicated to naming <a href="https://www.hexstreamsoft.com/articles/notes-tips-standard-common-lisp-symbols/themes/thin-wrappers/#typep" target="_blank">pure trivial <code>typep</code> thin wrappers</a>. These functions, while arguably convenient, are <em>almost pure overhead</em>, and they represent 2.6% of standard Common Lisp symbols. Compare:</p>
+
+        <pre><code>(stringp object)
+;;VS
+(typep object 'string)</code></pre>
+
+        <p>While the latter is slightly longer, think about all the overhead that goes into implementing, defining, documenting, learning and otherwise managing <em>all</em> pure trivial <code>typep</code> wrappers, including the standard and user-defined ones.</p>
+
+        <p>We can use a more orthogonal approach, just by always using <code>typep</code> directly. However, some code would become <em>very</em> annoying to write:</p>
+
+        <pre><code>(remove-if #'stringp '("string" symbol "other string"))
+;;VS
+(remove-if (lambda (o) (typep o 'string)) '("string" symbol "other string"))</code></pre>
+
+        <p>This is clearly unacceptable. We could make up some trivial function that takes a <var>type</var> and returns a closure that calls <code>typep</code> on its argument and the <var>type</var>, but what to call it? This library simply provides an enhanced version of <code>typep</code> that is exactly like the original, except it can also accept a single <var>type</var> argument, in which case it returns the appropriate closure:</p>
+
+        <pre><code>(remove-if #'stringp '("string" symbol "other string"))
+;;VS
+(remove-if (typep 'string) '("string" symbol "other string"))</code></pre>
+
+      </section>
+
+      <section id="dictionary">
+
+        <h1 class="breadcrumbs-bar">
+          <span class="section-relative-nav">
+            <a href="#dictionary" class="anchor">⚓</a>
+          </span>
+          <span class="breadcrumbs">
+            <a class="here">Dictionary</a>
+          </span>
+        </h1>
+
+        <nav class="tabs">
+          <ul>
+            <li><a href="#dictionary_enhanced-typep"><span class="type">Package</span> <code>enhanced-typep</code></a></li>
+            <li><a href="#dictionary_typep"><span class="type">Function</span> <code>typep</code></a></li>
+          </ul>
+        </nav>
+
+        <section id="dictionary_enhanced-typep">
+
+          <h1 class="breadcrumbs-bar">
+            <span class="section-relative-nav">
+              <a href="#dictionary_enhanced-typep" class="anchor">⚓</a>
+            </span>
+            <span class="breadcrumbs">
+              <a href="#dictionary">Dictionary</a>
+              <span class="crumb"><span class="s"> » </span><a class="here">enhanced-typep</a></span>
+            </span>
+          </h1>
+
+          <article class="package definition">
+
+            <h1><span class="type">Package</span> <span class="name self">enhanced-typep</span></h1>
+
+            <section class="description">
+              <h1>Description</h1>
+              <p>Simply <code>(:shadowing-import-from #:enhanced-typep #:<code class="relevant"><a href="#dictionary_typep">typep</a></code>)</code> from your <a href="http://www.lispworks.com/documentation/HyperSpec/Body/m_defpkg.htm" target="_blank">defpackage</a>. Don't <code>(:use)</code>!</p>
+            </section>
+
+          </article>
+
+        </section>
+
+        <section id="dictionary_typep">
+
+          <h1 class="breadcrumbs-bar">
+            <span class="section-relative-nav">
+              <a href="#dictionary_typep" class="anchor">⚓</a>
+            </span>
+            <span class="breadcrumbs">
+              <a href="#dictionary">Dictionary</a>
+              <span class="crumb"><span class="s"> » </span><a class="here">typep</a></span>
+            </span>
+          </h1>
+
+          <article class="function definition">
+
+            <h1><span class="type">Function</span> <span class="name self">typep</span></h1>
+
+            <div class="merged-args-and-retvals">
+              <p class="args-and-retvals"><var>object</var> <var>type</var> &amp;optional <var>environment</var> =&gt; <var>generalized-boolean</var></p>
+              <span class="or">or</span>
+              <p class="args-and-retvals"><var>type</var> =&gt; <var>function</var></p>
+            </div>
+
+            <section class="arguments-and-values">
+              <h1>Arguments and Values</h1>
+              <ul>
+                <li><var>object</var> -- An object.</li>
+                <li><var>type</var> -- A type.</li>
+                <li><var>environment</var> -- An <a href="http://www.lispworks.com/documentation/HyperSpec/Body/26_glo_e.htm#environment" target="_blank">environment</a>.</li>
+                <li><var>generalized-boolean</var> -- A <a href="http://www.lispworks.com/documentation/HyperSpec/Body/26_glo_g.htm#generalized_boolean" target="_blank">generalized boolean</a>.</li>
+                <li><var>function</var> -- A function.</li>
+              </ul>
+            </section>
+
+            <section class="description">
+              <h1>Description</h1>
+              <p>The semantics are exactly the same as for <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">cl:typep</a>, except that if only one argument is supplied, then that argument is treated as a <var>type</var> and we return a function of one argument <var>object</var> that, when called, returns the result of calling <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">cl:typep</a> on the <var>object</var> and <var>type</var>. (No provision is made for passing an <var>environment</var> parameter in that case, but this is virtually never needed anyway.)</p>
+              <p>To help ensure proper optimization, this function is <a href="http://www.lispworks.com/documentation/HyperSpec/Body/m_declai.htm" target="_blank">declaimed</a> <a href="http://www.lispworks.com/documentation/HyperSpec/Body/d_inline.htm" target="_blank">inline</a>, its <a href="http://www.lispworks.com/documentation/HyperSpec/Body/d_ftype.htm" target="_blank">ftype</a> is declared, and an appropriate <a href="http://www.lispworks.com/documentation/HyperSpec/Body/m_define.htm" target="_blank">compiler macro</a> is defined so that we expand directly to a <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">cl:typep</a> with the same arguments if at least 2 arguments were passed, else we expand directly to an optimized lambda.</p>
+            </section>
+
+          </article>
+
+        </section>
+
+        <nav class="end-of-section-indicator">
+          <a href="#dictionary">
+            "<span>Dictionary</span>" end.
+          </a>
+        </nav>
+
+      </section>
+
+    </main>
+
+    <footer id="footer">
+      <div class="back-to-top left">
+        <a href="#">⬆</a>
+      </div>
+      <div class="main">
+        <a href="https://validator.w3.org/check?uri=http%3A%2F%2Fwww.hexstreamsoft.com%2Flibraries%2Fenhanced-typep%2F">✔ HTML5</a>
+        <a href="https://www.hexstreamsoft.com/README">✔ Public Domain</a>
+        <a href="https://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Fwww.hexstreamsoft.com%2Flibraries%2Fenhanced-typep%2F">✔ CSS3</a>
+        <a>✔ Mobile-friendly</a>
+      </div>
+      <div class="back-to-top right">
+        <a href="#">⬆</a>
+      </div>
+    </footer>
+
+  </body>
+</html>
