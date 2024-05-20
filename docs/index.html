@@ -98,7 +98,7 @@
 
       <section id="introduction">
 
-        <p><dfn><code class="relevant">enhanced-typep</code></dfn> obsoletes all <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">typep</a> <a href="https://www.hexstreamsoft.com/articles/notes-tips-standard-common-lisp-symbols/themes/thin-wrappers/" target="_blank">thin wrappers</a>.</p>
+        <p><dfn><code class="relevant">enhanced-typep</code></dfn> obsoletes all <a href="https://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">typep</a> <a href="https://www.hexstreamsoft.com/articles/notes-tips-standard-common-lisp-symbols/themes/thin-wrappers/" target="_blank">thin wrappers</a>.</p>
 
       </section>
 
@@ -122,19 +122,19 @@
 
         <p>25 standard Common Lisp symbols are entirely dedicated to naming <a href="https://www.hexstreamsoft.com/articles/notes-tips-standard-common-lisp-symbols/themes/thin-wrappers/#typep" target="_blank">pure trivial <code>typep</code> thin wrappers</a>. These functions, while arguably convenient, are <em>almost pure overhead</em>, and they represent 2.6% of standard Common Lisp symbols. Compare:</p>
 
-        <pre><code>(<a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_stgp.htm" target="_blank">stringp</a> object)
+        <pre><code>(<a href="https://www.lispworks.com/documentation/HyperSpec/Body/f_stgp.htm" target="_blank">stringp</a> object)
 ;;VS
-(<a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">typep</a> object '<a href="http://www.lispworks.com/documentation/HyperSpec/Body/t_string.htm" target="_blank">string</a>)</code></pre>
+(<a href="https://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">typep</a> object '<a href="https://www.lispworks.com/documentation/HyperSpec/Body/t_string.htm" target="_blank">string</a>)</code></pre>
 
-        <p>While the latter is slightly longer, think about all the overhead that goes into implementing, defining, documenting, learning and otherwise managing <em>all</em> pure trivial <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">typep</a> wrappers, including the standard and user-defined ones.</p>
+        <p>While the latter is slightly longer, think about all the overhead that goes into implementing, defining, documenting, learning and otherwise managing <em>all</em> pure trivial <a href="https://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">typep</a> wrappers, including the standard and user-defined ones.</p>
 
-        <p>We can use a more orthogonal approach, just by always using <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">typep</a> directly. However, some code would become <em>very</em> annoying to write:</p>
+        <p>We can use a more orthogonal approach, just by always using <a href="https://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">typep</a> directly. However, some code would become <em>very</em> annoying to write:</p>
 
         <pre><code>(remove-if #'stringp '("string" symbol "other string"))
 ;;VS
-(remove-if (lambda (o) (<a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">typep</a> o 'string)) '("string" symbol "other string"))</code></pre>
+(remove-if (lambda (o) (<a href="https://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">typep</a> o 'string)) '("string" symbol "other string"))</code></pre>
 
-        <p>This is clearly unacceptable. We could make up some trivial function that takes a <var>type</var> and returns a closure that calls <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">typep</a> on its argument and the <var>type</var>, but what to call it? This library simply provides an enhanced version of <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">typep</a> that is exactly like the original, except it can also accept a single <var>type</var> argument, in which case it returns the appropriate closure:</p>
+        <p>This is clearly unacceptable. We could make up some trivial function that takes a <var>type</var> and returns a closure that calls <a href="https://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">typep</a> on its argument and the <var>type</var>, but what to call it? This library simply provides an enhanced version of <a href="https://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">typep</a> that is exactly like the original, except it can also accept a single <var>type</var> argument, in which case it returns the appropriate closure:</p>
 
         <pre><code>(remove-if #'stringp '("string" symbol "other string"))
 ;;VS
@@ -178,7 +178,7 @@
 
             <section class="description">
               <h1>Description</h1>
-              <p>Simply <code>(:shadowing-import-from #:enhanced-typep #:<code class="relevant"><a href="#dictionary_typep">typep</a></code>)</code> from your <a href="http://www.lispworks.com/documentation/HyperSpec/Body/m_defpkg.htm" target="_blank">defpackage</a>. Don't <code>(:use)</code>!</p>
+              <p>Simply <code>(:shadowing-import-from #:enhanced-typep #:<code class="relevant"><a href="#dictionary_typep">typep</a></code>)</code> from your <a href="https://www.lispworks.com/documentation/HyperSpec/Body/m_defpkg.htm" target="_blank">defpackage</a>. Don't <code>(:use)</code>!</p>
             </section>
 
           </article>
@@ -212,16 +212,16 @@
               <ul>
                 <li><var>object</var> -- An object.</li>
                 <li><var>type</var> -- A type.</li>
-                <li><var>environment</var> -- An <a href="http://www.lispworks.com/documentation/HyperSpec/Body/26_glo_e.htm#environment" target="_blank">environment</a>.</li>
-                <li><var>generalized-boolean</var> -- A <a href="http://www.lispworks.com/documentation/HyperSpec/Body/26_glo_g.htm#generalized_boolean" target="_blank">generalized boolean</a>.</li>
+                <li><var>environment</var> -- An <a href="https://www.lispworks.com/documentation/HyperSpec/Body/26_glo_e.htm#environment" target="_blank">environment</a>.</li>
+                <li><var>generalized-boolean</var> -- A <a href="https://www.lispworks.com/documentation/HyperSpec/Body/26_glo_g.htm#generalized_boolean" target="_blank">generalized boolean</a>.</li>
                 <li><var>function</var> -- A function.</li>
               </ul>
             </section>
 
             <section class="description">
               <h1>Description</h1>
-              <p>The semantics are exactly the same as for <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">cl:typep</a>, except that if only one argument is supplied, then that argument is treated as a <var>type</var> and we return a function of one argument <var>object</var> that, when called, returns the result of calling <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">cl:typep</a> on the <var>object</var> and <var>type</var>. (No provision is made for passing an <var>environment</var> parameter in that case, but this is virtually never needed anyway.)</p>
-              <p>To help ensure proper optimization, this function is <a href="http://www.lispworks.com/documentation/HyperSpec/Body/m_declai.htm" target="_blank">declaimed</a> <a href="http://www.lispworks.com/documentation/HyperSpec/Body/d_inline.htm" target="_blank">inline</a>, its <a href="http://www.lispworks.com/documentation/HyperSpec/Body/d_ftype.htm" target="_blank">ftype</a> is declared, and an appropriate <a href="http://www.lispworks.com/documentation/HyperSpec/Body/m_define.htm" target="_blank">compiler macro</a> is defined so that we expand directly to a <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">cl:typep</a> with the same arguments if at least 2 arguments were passed, else we expand directly to an optimized lambda.</p>
+              <p>The semantics are exactly the same as for <a href="https://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">cl:typep</a>, except that if only one argument is supplied, then that argument is treated as a <var>type</var> and we return a function of one argument <var>object</var> that, when called, returns the result of calling <a href="https://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">cl:typep</a> on the <var>object</var> and <var>type</var>. (No provision is made for passing an <var>environment</var> parameter in that case, but this is virtually never needed anyway.)</p>
+              <p>To help ensure proper optimization, this function is <a href="https://www.lispworks.com/documentation/HyperSpec/Body/m_declai.htm" target="_blank">declaimed</a> <a href="https://www.lispworks.com/documentation/HyperSpec/Body/d_inline.htm" target="_blank">inline</a>, its <a href="https://www.lispworks.com/documentation/HyperSpec/Body/d_ftype.htm" target="_blank">ftype</a> is declared, and an appropriate <a href="https://www.lispworks.com/documentation/HyperSpec/Body/m_define.htm" target="_blank">compiler macro</a> is defined so that we expand directly to a <a href="https://www.lispworks.com/documentation/HyperSpec/Body/f_typep.htm" target="_blank">cl:typep</a> with the same arguments if at least 2 arguments were passed, else we expand directly to an optimized lambda.</p>
             </section>
 
           </article>
